@@ -1,0 +1,14 @@
+--- a/sk.c	2021-07-05 02:51:59.000000000 +0100
++++ b/sk.c	2024-01-02 18:28:37.473510221 +0000
+@@ -37,6 +37,10 @@
+ #include "print.h"
+ #include "sk.h"
+ 
++/* pgmwashere */
++enum {
++HWTSTAMP_TX_ONESTEP_P2P = 3
++};
+ /* globals */
+ 
+ int sk_tx_timeout = 1;
+
