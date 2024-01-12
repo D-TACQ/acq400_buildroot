@@ -1,0 +1,5 @@
+#!/bin/bash
+DC="$(date +%y%m%d%H%M)"
+
+git tag -a -m R${DC} R${DC}
+
