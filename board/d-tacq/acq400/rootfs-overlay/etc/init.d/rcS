@@ -145,14 +145,20 @@ fi
 echo +++ bind legacy modules dir /usr/local/lib/modules
 mount --bind $LIBMOD /usr/local/lib/modules
 
-	
-echo "++ Starting http daemon"
-httpd -h /var/www
+
+if [ ! -z $(which httpd) ]; then
+	echo "++ Starting http daemon"
+	httpd -h /var/www
+fi
 
 echo "++ Starting ssh daemon"
 chmod 600 /etc/ssh/*
 /usr/sbin/sshd
 
+if [ -d /mnt/EBREAK ]; then
+	PS1=EBREAK\>
+	/bin/sh
+fi
 
 # PS1=DBG5: /bin/sh
 
