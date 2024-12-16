@@ -152,11 +152,15 @@ if [ ! -z $(which httpd) ]; then
 fi
 
 echo "++ Starting ssh daemon"
-if [ -d /mnt/local/ssh ]; then
+if [ -d /mnt/local/etc ]; then
 	echo "+++ Overlaying local ssh customization"
-	cp /mnt/local/ssh/* /etc/ssh/
-fi
+	mkdir -p /tmp/etc
+	cp -R /mnt/local/etc/* /tmp/etc
+	chmod -R 600 /tmp/etc/*
+	cp -R /tmp/etc/* /etc/
+else
 chmod 600 /etc/ssh/*
+fi
 /usr/sbin/sshd
 
 if [ -d /mnt/EBREAK ]; then
