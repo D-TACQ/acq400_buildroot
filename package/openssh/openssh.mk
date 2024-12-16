@@ -51,6 +51,11 @@ else
 OPENSSH_CONF_OPTS += --without-audit
 endif
 
+ifeq ($(BR2_PACKAGE_LIBKRB5),y)
+OPENSSH_CONF_OPTS += --with-kerberos5=yes
+OPENSSH_DEPENDENCIES += libkrb5
+endif
+
 ifeq ($(BR2_PACKAGE_LINUX_PAM),y)
 define OPENSSH_INSTALL_PAM_CONF
 	$(INSTALL) -D -m 644 $(@D)/contrib/sshd.pam.generic $(TARGET_DIR)/etc/pam.d/sshd
