@@ -152,6 +152,10 @@ if [ ! -z $(which httpd) ]; then
 fi
 
 echo "++ Starting ssh daemon"
+if [ -d /mnt/local/ssh ]; then
+	echo "+++ Overlaying local ssh customization"
+	cp /mnt/local/ssh/* /etc/ssh/
+fi
 chmod 600 /etc/ssh/*
 /usr/sbin/sshd
 
