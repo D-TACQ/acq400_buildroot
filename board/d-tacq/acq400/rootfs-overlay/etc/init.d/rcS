@@ -158,9 +158,8 @@ if [ -d /mnt/local/etc ]; then
 	cp -R /mnt/local/etc/* /tmp/etc
 	chmod -R 600 /tmp/etc/*
 	cp -R /tmp/etc/* /etc/
-else
-chmod 600 /etc/ssh/*
 fi
+chmod 600 /etc/ssh/*
 /usr/sbin/sshd
 
 if [ -d /mnt/EBREAK ]; then
