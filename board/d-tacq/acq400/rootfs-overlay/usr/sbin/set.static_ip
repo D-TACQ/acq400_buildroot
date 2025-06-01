@@ -2,19 +2,38 @@
 
 PORT=${1}
 IP=${2}
+subnet_guess=${IP%.*}
+bc_guess=${subnet_guess}.255
+gw_guess=${subnet_guess}.1
+
+NM=${3:-255.255.255.0}
+BC=${4:-$bc_guess}
+GW=${5:-$gw_guess}
+
+# comment out script items if we are guessing
+[ "$5" = "" ] && GUESS=#
+[ "$5" = "" ] && EXAMPLE=' example setting, please edit'
 
 if [ "x$PORT" = "x" -o "x$IP" = "x" ]; then
-	echo set.static_ip IPx ip-address
+	echo 'set.static_ip IPx ip-address [NM BC GW]'
 fi
 
 PN=$(echo $PORT | tr -cd  [0-9])
 
 case $PN in
 0|1)
-	echo ifconfig eth$PN $IP >/mnt/local/network
-	chmod a+rx /mnt/local/network ;;
+	dev=eth$PN
+	cat - >/mnt/local/network <<EOF
+ifconfig $dev $IP
+# broadcast setting $EXAMPLE
+${GUESS}ifconfig $dev $IP netmask $NM broadcast $BC
+# default routing $EXAMPLE
+${GUESS}route add -net default gw $GW $dev
+EOF
+	chmod a+rx /mnt/local/network
+	echo 'created /mnt/local/network, check it here:'
+	cat /mnt/local/network;;
 esac
-
 
 
 
