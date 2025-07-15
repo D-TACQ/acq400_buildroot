@@ -42,3 +42,8 @@ git checkout -b bacq400_v2022.03
 git tag -a acq400_v2022.03
 
 # do not make branch and tag names the same!
+
+# fedora borked wget by replacing it with wget2. Exterminate!:
+  285  dnf4 install --allowerasing wget1-wget wget1
+  286  dnf4 erase wget2 wget2-libs
+
