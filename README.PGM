@@ -38,8 +38,10 @@ make savedefconfig
  1058  git merge master
  1059  history
 
-git checkout -b bacq400_v2022.03
-git tag -a acq400_v2022.03
+after making a change:
+git tag -a acq400_v2025.08 -m "acq400_v2025.08"
+git push origin acq400_v2025.08
+
 
 # do not make branch and tag names the same!
 
