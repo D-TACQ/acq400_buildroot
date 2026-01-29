@@ -42,6 +42,8 @@ after making a change:
 git tag -a acq400_v2025.08 -m "acq400_v2025.08"
 git push origin acq400_v2025.08
 
+The above needed to avoid a "DIRTY" status report
+
 
 # do not make branch and tag names the same!
 
